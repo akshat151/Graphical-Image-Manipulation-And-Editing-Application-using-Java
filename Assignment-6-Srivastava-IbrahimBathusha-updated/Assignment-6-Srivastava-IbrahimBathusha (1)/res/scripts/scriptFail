@@ -1,0 +1,20 @@
+#load SMPTE.ppm and call it 'SMPTE'
+load res/SMPTE/SMPTE-original.ppm SMPTE
+
+#brighten command is wrong
+brighten SMPTE SMPTE-brighter
+
+#brighten SMPTE by adding 10
+brighten 10 SMPTE SMPTE-brighter
+
+#greyscale command is wrong
+greyscale red-component SMPTE
+
+#create a greyscale using only the value component, as an image SMPTE-greyscale
+greyscale red-component SMPTE SMPTE-greyscale
+
+#save SMPTE-brighter
+save res/SMPTE-brighter.ppm SMPTE-brighter
+
+#save SMPTE-greyscale
+save res/SMPTE-gs.ppm SMPTE-greyscale
