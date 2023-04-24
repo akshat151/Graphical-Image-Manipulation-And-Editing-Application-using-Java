@@ -419,7 +419,7 @@ public class ImageImpl implements ImageInterface {
       for (int y = 0; y < height; y++) {
         Point pixel = new Point(x, y);
         Point closestSeed = findClosestSeed(pixel, seeds);
-        PixelInterface color = getValidPixel(x, y);
+        PixelInterface color = getValidPixel(y, x);
         List<PixelInterface> cluster = clusters.getOrDefault(closestSeed, new ArrayList<>());
         cluster.add(color);
         clusters.put(closestSeed, cluster);
@@ -437,10 +437,10 @@ public class ImageImpl implements ImageInterface {
 
     // For each pixel in the destination image, set its color to the average color of its
     // corresponding cluster in the source image
-    for (int x = 0; x < width; x++) {
+    for (int x = 0; x < this.imageArray.size(); x++) {
       List<PixelInterface> row = new ArrayList<>();
-      for (int y = 0; y < height; y++) {
-        Point pixel = new Point(x, y);
+      for (int y = 0; y < this.imageArray.get(0).size(); y++) {
+        Point pixel = new Point(y, x);
         Point closestSeed = findClosestSeed(pixel, seeds);
         PixelInterface color = clusterColors.get(closestSeed);
         row.add(color);
