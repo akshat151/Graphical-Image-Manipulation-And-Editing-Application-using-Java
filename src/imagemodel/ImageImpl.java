@@ -404,13 +404,13 @@ public class ImageImpl implements ImageInterface {
   }
 
   @Override
-  public ImageInterface mosaic(int num_of_seeds) {
+  public ImageInterface mosaic(int numOfSeeds) {
     List<List<PixelInterface>> mosaicImage;
 
     int height = this.imageArray.size();
     int width = this.imageArray.get(0).size();
 
-    List<int[]> seeds = generateRandomSeeds(num_of_seeds, width, height);
+    List<int[]> seeds = generateRandomSeeds(numOfSeeds, width, height);
     Map<int[], List<PixelInterface>> clusters = createClusters(seeds, width, height);
     Map<int[], PixelInterface> clusterColors = computeClusterColors(clusters);
     mosaicImage = createMosaicImage(width, height, seeds, clusterColors);
@@ -489,7 +489,9 @@ public class ImageImpl implements ImageInterface {
   }
 
   private PixelInterface computeAverageColor(List<PixelInterface> colors) {
-    int r = 0, g = 0, b = 0;
+    int r = 0;
+    int g = 0;
+    int b = 0;
     for (PixelInterface color : colors) {
       r += color.getRed();
       g += color.getGreen();

@@ -9,6 +9,10 @@ import imagecontroller.ImageCommandInterface;
 import imagemodel.ImageInterface;
 import imagemodel.ImageStore;
 
+/**
+ * This class represents the Mosaic operation, that is performed
+ * on an image.
+ */
 public class Mosaic implements ImageCommandInterface {
 
   @Override
