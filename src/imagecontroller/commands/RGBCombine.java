@@ -19,6 +19,7 @@ public class RGBCombine implements ImageCommandInterface {
 
   /**
    * Constructor for RGBCombine class.
+   *
    * @param imgHelper the helper class for image implementation
    */
   public RGBCombine(ImageImplHelper imgHelper) {

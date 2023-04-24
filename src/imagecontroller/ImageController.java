@@ -1,18 +1,17 @@
 package imagecontroller;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 import helpers.ImageImplHelper;
+import helpers.Response;
 import imagecontroller.commands.CommandUtil;
 import imagemodel.ImageStore;
-import helpers.Response;
 import imageview.View;
-
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.util.Scanner;
 
 /**
  * This class represents the controller for the Image Processing application. It is responsible for
@@ -151,7 +150,7 @@ public class ImageController extends AbstractController {
       this.scriptsSeen.add(arguments.get(0));
       if (containsRepeatedSublist(this.scriptsSeen)) {
         throw new IllegalArgumentException(
-            "Infinite recursion detected. Please check the script\n");
+                "Infinite recursion detected. Please check the script\n");
       }
       File file = CommandUtil.validateFilePath(arguments.get(0));
       Scanner scanner = new Scanner(file);

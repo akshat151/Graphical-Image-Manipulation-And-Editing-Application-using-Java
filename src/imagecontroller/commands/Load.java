@@ -17,6 +17,7 @@ public class Load implements ImageCommandInterface {
 
   /**
    * Constructor for Load class.
+   *
    * @param imgHelper the helper class for image implementation
    */
   public Load(ImageImplHelper imgHelper) {

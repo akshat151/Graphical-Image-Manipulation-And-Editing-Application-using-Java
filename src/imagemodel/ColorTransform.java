@@ -10,9 +10,10 @@ public class ColorTransform {
 
   /**
    * This constructor creates a color transform from a list of lists of doubles.
+   *
    * @param transform the list of lists of doubles that represent the color transform
    * @throws IllegalArgumentException if the list of lists of doubles is not a valid color transform
-   *     kernel
+   *                                  kernel
    */
   public ColorTransform(List<List<Double>> transform) throws IllegalArgumentException {
     if (transform.size() != transform.get(0).size() || transform.size() != 3) {

@@ -20,11 +20,11 @@ public class HistogramHelper {
       case "blue":
         return rgb & 0x000000ff;
       case "intensity":
-        return (int)Math.round((
-                (double)((rgb & 0x00ff0000) >> 16)
-                + (double)((rgb & 0x0000ff00) >> 8)
-                + (double)(rgb & 0x000000ff)
-        ) / 3.0) ;
+        return (int) Math.round((
+                (double) ((rgb & 0x00ff0000) >> 16)
+                        + (double) ((rgb & 0x0000ff00) >> 8)
+                        + (double) (rgb & 0x000000ff)
+        ) / 3.0);
       default:
         return 0;
     }
@@ -32,7 +32,8 @@ public class HistogramHelper {
 
   /**
    * Returns a histogram of the image for the given channel.
-   * @param image - the image
+   *
+   * @param image   - the image
    * @param channel - the channel for which the histogram is to be generated
    * @return a list of 256 elements, each element representing the number of pixels in the image
    */
@@ -54,6 +55,7 @@ public class HistogramHelper {
 
   /**
    * Returns a map of all the histograms of the image.
+   *
    * @param image - the image
    * @return a map of all the histograms of the image
    */

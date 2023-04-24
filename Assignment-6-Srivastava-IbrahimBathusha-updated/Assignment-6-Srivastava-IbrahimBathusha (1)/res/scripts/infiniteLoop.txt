@@ -1,8 +1,0 @@
-#load SMPTE.ppm and call it 'SMPTE'
-load res/SMPTE/SMPTE-original.ppm SMPTE
-
-#brighten SMPTE by adding 10
-brighten 10 SMPTE SMPTE-brighter
-
-# Call this script to test the infinte loop possibility
-run res/scripts/infiniteLoop.txt

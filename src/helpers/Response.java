@@ -8,17 +8,7 @@ import java.awt.image.BufferedImage;
  */
 public class Response {
   private final String response;
-
-  /**
-   * Enum representing possible response types.
-   */
-  public enum ResponseType {
-    ERROR,
-    SUCCESS
-  }
-
   private ResponseType responseType;
-
   private BufferedImage image;
 
   /**
@@ -85,5 +75,13 @@ public class Response {
   @Override
   public String toString() {
     return this.response + " " + this.responseType;
+  }
+
+  /**
+   * Enum representing possible response types.
+   */
+  public enum ResponseType {
+    ERROR,
+    SUCCESS
   }
 }

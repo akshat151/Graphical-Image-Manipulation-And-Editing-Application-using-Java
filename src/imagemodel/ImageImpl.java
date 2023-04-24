@@ -20,7 +20,6 @@ import imagecontroller.savers.PPMSaver;
  */
 public class ImageImpl implements ImageInterface {
   private final List<List<PixelInterface>> imageArray;
-  private int maxColorValue;
   // Image Saver Classes
   private final Map<String, ImageSaver> imageSaverMap = new HashMap<>() {
     {
@@ -47,6 +46,7 @@ public class ImageImpl implements ImageInterface {
       put("luma-component", PixelInterface::getLuma);
     }
   };
+  private int maxColorValue;
 
   /**
    * Construct a new Image with an empty image array.
@@ -423,7 +423,7 @@ public class ImageImpl implements ImageInterface {
     Map<int[], List<PixelInterface>> clusters = new HashMap<>();
     for (int x = 0; x < width; x++) {
       for (int y = 0; y < height; y++) {
-        int[] pixel = { x, y };
+        int[] pixel = {x, y};
         int[] closestSeed = findClosestSeed(pixel, seeds);
         PixelInterface color = getValidPixel(y, x);
         List<PixelInterface> cluster = clusters.getOrDefault(closestSeed, new ArrayList<>());
@@ -452,7 +452,7 @@ public class ImageImpl implements ImageInterface {
     for (int x = 0; x < height; x++) {
       List<PixelInterface> row = new ArrayList<>();
       for (int y = 0; y < width; y++) {
-        int[] pixel = { y, x };
+        int[] pixel = {y, x};
         int[] closestSeed = findClosestSeed(pixel, seeds);
         PixelInterface color = clusterColors.get(closestSeed);
         row.add(color);

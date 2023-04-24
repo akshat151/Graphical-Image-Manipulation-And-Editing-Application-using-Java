@@ -4,8 +4,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Stack;
 
-import imagemodel.ImageInterface;
 import imagecontroller.ImageCommandInterface;
+import imagemodel.ImageInterface;
 import imagemodel.ImageStore;
 
 /**

@@ -6,12 +6,12 @@ import java.util.List;
 import java.util.Map;
 
 import imagecontroller.ImageCommandInterface;
+import imagecontroller.ImageSaver;
 import imagecontroller.savers.BMPSaver;
 import imagecontroller.savers.JPEGSaver;
 import imagecontroller.savers.PNGSaver;
 import imagecontroller.savers.PPMSaver;
 import imagemodel.ImageInterface;
-import imagecontroller.ImageSaver;
 import imagemodel.ImageStore;
 
 /**
@@ -88,8 +88,8 @@ public class Save implements ImageCommandInterface {
 
     try {
       imageSaver.save(
-            imageToSave,
-            savePath
+              imageToSave,
+              savePath
       );
     } catch (IOException e) {
       throw new IllegalArgumentException("The image could not be saved due to : " + e.getMessage());

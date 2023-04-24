@@ -1,21 +1,13 @@
 package imageview;
 
-import java.awt.Color;
-import java.awt.Stroke;
-import java.awt.BasicStroke;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.FontMetrics;
-import java.awt.Point;
-import java.awt.Font;
-import java.awt.RenderingHints;
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.swing.JPanel;
+import javax.swing.*;
 
 /**
  * This class represents the panel that displays the histogram of the image. It extends the JPanel
@@ -23,8 +15,8 @@ import javax.swing.JPanel;
  */
 public class HistogramGraphPanel extends JPanel {
 
-  private final Color gridColor = new Color(200, 200, 200, 200);
   private static final Stroke GRAPH_STROKE = new BasicStroke(1f);
+  private final Color gridColor = new Color(200, 200, 200, 200);
   private final int pointWidth = 4;
   private Map<String, List<Double>> histogram;
 

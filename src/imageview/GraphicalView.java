@@ -31,9 +31,9 @@ public class GraphicalView extends JFrame implements View {
   private final JButton save;
   private final JButton undo;
   private final JButton combine;
-  private JComboBox operationDrop;
   private final ImageCanvas imageCanvas;
   private final HistogramGraphPanel histogramGraphPanel;
+  private JComboBox operationDrop;
   private String[] commands = {"Loading commands..."};
 
 
@@ -203,7 +203,8 @@ public class GraphicalView extends JFrame implements View {
       chooser.setDialogTitle("Choose File to Load");
       chooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
       chooser.setAcceptAllFileFilterUsed(false);
-      chooser.setFileFilter(new FileNameExtensionFilter("Image Files", "jpg", "png", "ppm", "bmp"));
+      chooser.setFileFilter(new FileNameExtensionFilter("Image Files", "jpg", "png", "ppm",
+              "bmp"));
 
       File loadFile = null;
 
@@ -317,7 +318,8 @@ public class GraphicalView extends JFrame implements View {
       chooser.setDialogTitle("Choose files to combine");
       chooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
       chooser.setAcceptAllFileFilterUsed(false);
-      chooser.setFileFilter(new FileNameExtensionFilter("Image Files", "jpg", "png", "ppm", "bmp"));
+      chooser.setFileFilter(new FileNameExtensionFilter("Image Files", "jpg", "png", "ppm",
+              "bmp"));
 
       chooser.setMultiSelectionEnabled(true);
 

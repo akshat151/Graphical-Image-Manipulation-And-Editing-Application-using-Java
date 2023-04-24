@@ -52,7 +52,7 @@ public class RGBPixel implements PixelInterface {
 
   @Override
   public int getLuma() {
-    return (int)Math.round(0.2126 * red + 0.7152 * green + 0.0722 * blue);
+    return (int) Math.round(0.2126 * red + 0.7152 * green + 0.0722 * blue);
   }
 
   @Override
@@ -83,9 +83,9 @@ public class RGBPixel implements PixelInterface {
   @Override
   public PixelInterface add(double value) {
     return new RGBPixel(
-          (int)Math.round(red + value),
-          (int)Math.round(green + value),
-          (int)Math.round(blue + value)
+            (int) Math.round(red + value),
+            (int) Math.round(green + value),
+            (int) Math.round(blue + value)
     );
   }
 }

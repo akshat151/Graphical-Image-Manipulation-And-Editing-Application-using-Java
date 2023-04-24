@@ -8,11 +8,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import helpers.loaders.BMPLoader;
 import helpers.loaders.ImageLoader;
 import helpers.loaders.JpegLoader;
 import helpers.loaders.PNGLoader;
 import helpers.loaders.PPMLoader;
-import helpers.loaders.BMPLoader;
 import imagemodel.ImageImpl;
 import imagemodel.ImageInterface;
 import imagemodel.PixelInterface;
@@ -178,9 +178,9 @@ public class ImageImplHelper {
         int r = redP.getRed();
         int g = greenP.getGreen();
         int b = blueP.getBlue();
-        checkGreyscale(r,redP.getGreen(), redP.getBlue());
-        checkGreyscale(g,greenP.getRed(), greenP.getBlue());
-        checkGreyscale(b,blueP.getGreen(), blueP.getRed());
+        checkGreyscale(r, redP.getGreen(), redP.getBlue());
+        checkGreyscale(g, greenP.getRed(), greenP.getBlue());
+        checkGreyscale(b, blueP.getGreen(), blueP.getRed());
         row.add(new RGBPixel(r, g, b));
       }
       combineImageArray.add(row);

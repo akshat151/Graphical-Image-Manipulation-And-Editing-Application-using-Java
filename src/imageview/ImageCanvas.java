@@ -1,8 +1,6 @@
 package imageview;
 
-import java.awt.Canvas;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
+import java.awt.*;
 import java.awt.image.BufferedImage;
 
 /**
@@ -15,6 +13,7 @@ public class ImageCanvas extends Canvas {
 
   /**
    * Creates an object on type ImageCanvas.
+   *
    * @param image BufferedImage to be displayed.
    */
   public ImageCanvas(BufferedImage image) {
@@ -23,6 +22,7 @@ public class ImageCanvas extends Canvas {
 
   /**
    * sets the canvas to display an image.
+   *
    * @param image BufferedImage to be displayed.
    */
   public void setImage(BufferedImage image) {

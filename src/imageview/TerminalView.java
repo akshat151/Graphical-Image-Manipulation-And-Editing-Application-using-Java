@@ -20,7 +20,8 @@ public class TerminalView implements View {
 
   /**
    * Parameterized Constructor for the TerminalView class.
-   * @param in the input stream to read from.
+   *
+   * @param in  the input stream to read from.
    * @param out the output stream to write to.
    */
   public TerminalView(InputStream in, OutputStream out) {

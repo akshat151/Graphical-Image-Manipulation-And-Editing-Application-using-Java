@@ -11,6 +11,7 @@ public class Kernel {
 
   /**
    * This constructor creates a kernel from a list of lists of doubles.
+   *
    * @param filter the list of lists of doubles that represent the kernel
    * @throws IllegalArgumentException if the kernel is not valid
    */

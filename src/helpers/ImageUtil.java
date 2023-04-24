@@ -1,10 +1,10 @@
 package helpers;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
-import java.io.FileNotFoundException;
-import java.io.FileInputStream;
 
 import imagemodel.ImageImpl;
 import imagemodel.ImageInterface;
@@ -98,6 +98,7 @@ public class ImageUtil {
 
   /**
    * Demo main to read a PPM file.
+   *
    * @param args the command line arguments
    */
   //demo main

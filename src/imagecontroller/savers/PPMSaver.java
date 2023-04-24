@@ -5,9 +5,9 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.nio.charset.StandardCharsets;
 
+import helpers.Response;
 import imagecontroller.ImageSaver;
 import imagemodel.ImageInterface;
-import helpers.Response;
 
 
 /**
@@ -42,7 +42,7 @@ public class PPMSaver implements ImageSaver {
       throw new IllegalArgumentException("The file is not found at path : " + path);
     } catch (IOException e) {
       throw new RuntimeException("Error while writing to file : "
-            + path + " : " + e.getMessage());
+              + path + " : " + e.getMessage());
     }
 
     return new Response("Image saved successfully");

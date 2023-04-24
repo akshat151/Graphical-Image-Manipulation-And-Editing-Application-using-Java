@@ -7,10 +7,10 @@ import java.util.List;
 
 import javax.imageio.ImageIO;
 
+import helpers.Response;
 import imagecontroller.ImageSaver;
 import imagemodel.ImageInterface;
 import imagemodel.PixelInterface;
-import helpers.Response;
 
 /**
  * GenericSaver class implements ImageSaver. GenericSaver class is used to save an image. Any image
@@ -18,6 +18,30 @@ import helpers.Response;
  * class.
  */
 public abstract class GenericSaver implements ImageSaver {
+
+  /**
+   * Method to convert an ImageInterface object to BufferedImage.
+   *
+   * @param imageInterfaceObject object of type ImageInterface.
+   */
+  public static BufferedImage getBufferedImage(ImageInterface imageInterfaceObject) {
+    List<List<PixelInterface>> imageArray = imageInterfaceObject.getImageArray();
+    BufferedImage image = new BufferedImage(
+            imageArray.get(0).size(),
+            imageArray.size(),
+            BufferedImage.TYPE_INT_RGB
+    );
+    for (int i = 0; i < imageArray.size(); i++) {
+      for (int j = 0; j < imageArray.get(0).size(); j++) {
+        // Make the corresponding rgb value from the red, green and blue values
+        int rgbVal = (imageArray.get(i).get(j).getRed() << 16)
+                | (imageArray.get(i).get(j).getGreen() << 8)
+                | imageArray.get(i).get(j).getBlue();
+        image.setRGB(j, i, rgbVal);
+      }
+    }
+    return image;
+  }
 
   @Override
   public Response save(ImageInterface image, String path) throws IOException {
@@ -46,28 +70,5 @@ public abstract class GenericSaver implements ImageSaver {
     ImageIO.write(bufferedImage, this.getExtension(), outputFile);
 
     return new Response("Image saved successfully");
-  }
-
-  /**
-   * Method to convert an ImageInterface object to BufferedImage.
-   * @param imageInterfaceObject object of type ImageInterface.
-   */
-  public static BufferedImage getBufferedImage(ImageInterface imageInterfaceObject) {
-    List<List<PixelInterface>> imageArray = imageInterfaceObject.getImageArray();
-    BufferedImage image = new BufferedImage(
-          imageArray.get(0).size(),
-          imageArray.size(),
-          BufferedImage.TYPE_INT_RGB
-    );
-    for (int i = 0; i < imageArray.size(); i++) {
-      for (int j = 0; j < imageArray.get(0).size(); j++) {
-        // Make the corresponding rgb value from the red, green and blue values
-        int rgbVal = (imageArray.get(i).get(j).getRed() << 16)
-              | (imageArray.get(i).get(j).getGreen() << 8)
-              | imageArray.get(i).get(j).getBlue();
-        image.setRGB(j, i, rgbVal);
-      }
-    }
-    return image;
   }
 }

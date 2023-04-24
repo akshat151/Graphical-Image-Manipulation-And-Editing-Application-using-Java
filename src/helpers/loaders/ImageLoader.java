@@ -14,6 +14,7 @@ public interface ImageLoader {
 
   /**
    * This method loads an image from a file path.
+   *
    * @param fileInputStream the image bytes to be loaded
    * @return the image loaded from the file path
    */
@@ -21,12 +22,14 @@ public interface ImageLoader {
 
   /**
    * Returns the supported extension of the image loader.
+   *
    * @return supported extension of the loader
    */
   String getSupportedExtension();
 
   /**
    * This method checks if the image is valid.
+   *
    * @param filePath the file path of the image to be checked
    * @return true if the image is valid, false otherwise
    */
