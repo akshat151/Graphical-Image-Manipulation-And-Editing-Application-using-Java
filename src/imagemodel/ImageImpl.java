@@ -1,11 +1,11 @@
 package imagemodel;
 
-import java.awt.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 import java.util.function.Function;
 
 import imagecontroller.ImageSaver;
@@ -405,66 +405,81 @@ public class ImageImpl implements ImageInterface {
 
   @Override
   public ImageInterface mosaic(int num_of_seeds) {
-    List<List<PixelInterface>> mosaicImage = new ArrayList<>();
+    List<List<PixelInterface>> mosaicImage;
 
     int height = this.imageArray.size();
     int width = this.imageArray.get(0).size();
-    // Generate random seed points
-    List<Point> seeds = generateRandomSeeds(num_of_seeds, width, height);
 
-    // For each pixel in the source image, find the closest seed point and assign it to the
-    // corresponding cluster
-    Map<Point, List<PixelInterface>> clusters = new HashMap<>();
+    List<int[]> seeds = generateRandomSeeds(num_of_seeds, width, height);
+    Map<int[], List<PixelInterface>> clusters = createClusters(seeds, width, height);
+    Map<int[], PixelInterface> clusterColors = computeClusterColors(clusters);
+    mosaicImage = createMosaicImage(width, height, seeds, clusterColors);
+
+    return new ImageImpl(mosaicImage);
+  }
+
+  private Map<int[], List<PixelInterface>> createClusters(List<int[]> seeds, int width,
+                                                          int height) {
+    Map<int[], List<PixelInterface>> clusters = new HashMap<>();
     for (int x = 0; x < width; x++) {
       for (int y = 0; y < height; y++) {
-        Point pixel = new Point(x, y);
-        Point closestSeed = findClosestSeed(pixel, seeds);
+        int[] pixel = { x, y };
+        int[] closestSeed = findClosestSeed(pixel, seeds);
         PixelInterface color = getValidPixel(y, x);
         List<PixelInterface> cluster = clusters.getOrDefault(closestSeed, new ArrayList<>());
         cluster.add(color);
         clusters.put(closestSeed, cluster);
       }
     }
+    return clusters;
+  }
 
-    // Compute the average color of each cluster
-    Map<Point, PixelInterface> clusterColors = new HashMap<>();
-    for (Map.Entry<Point, List<PixelInterface>> entry : clusters.entrySet()) {
-      Point seed = entry.getKey();
+  private Map<int[], PixelInterface> computeClusterColors(Map<int[],
+          List<PixelInterface>> clusters) {
+    Map<int[], PixelInterface> clusterColors = new HashMap<>();
+    for (Map.Entry<int[], List<PixelInterface>> entry : clusters.entrySet()) {
+      int[] seed = entry.getKey();
       List<PixelInterface> colors = entry.getValue();
       PixelInterface averageColor = computeAverageColor(colors);
       clusterColors.put(seed, averageColor);
     }
+    return clusterColors;
+  }
 
-    // For each pixel in the destination image, set its color to the average color of its
-    // corresponding cluster in the source image
-    for (int x = 0; x < this.imageArray.size(); x++) {
+  private List<List<PixelInterface>> createMosaicImage(int width, int height, List<int[]> seeds,
+                                                       Map<int[], PixelInterface> clusterColors) {
+    List<List<PixelInterface>> mosaicImage = new ArrayList<>();
+    for (int x = 0; x < height; x++) {
       List<PixelInterface> row = new ArrayList<>();
-      for (int y = 0; y < this.imageArray.get(0).size(); y++) {
-        Point pixel = new Point(y, x);
-        Point closestSeed = findClosestSeed(pixel, seeds);
+      for (int y = 0; y < width; y++) {
+        int[] pixel = { y, x };
+        int[] closestSeed = findClosestSeed(pixel, seeds);
         PixelInterface color = clusterColors.get(closestSeed);
         row.add(color);
       }
       mosaicImage.add(row);
     }
-    return new ImageImpl(mosaicImage);
+    return mosaicImage;
   }
 
-  private List<Point> generateRandomSeeds(int numSeeds, int width, int height) {
-    List<Point> seeds = new ArrayList<>();
+
+  private List<int[]> generateRandomSeeds(int numSeeds, int width, int height) {
+    List<int[]> seeds = new ArrayList<>();
+    Random random = new Random(200);
     for (int i = 0; i < numSeeds; i++) {
-      int x = (int) (Math.random() * width);
-      int y = (int) (Math.random() * height);
-      seeds.add(new Point(x, y));
+      int x = random.nextInt(width);
+      int y = random.nextInt(height);
+      seeds.add(new int[]{x, y});
     }
     return seeds;
   }
 
-  private Point findClosestSeed(Point pixel, List<Point> seeds) {
+  private int[] findClosestSeed(int[] pixel, List<int[]> seeds) {
     double minDistance = Double.MAX_VALUE;
-    Point closestSeed = null;
-    for (Point seed : seeds) {
-      double distance = pixel.distance(seed);
+    int[] closestSeed = null;
+    for (int[] seed : seeds) {
+      double distance = Math.sqrt(Math.pow(seed[0] - pixel[0], 2)
+              + Math.pow(seed[1] - pixel[1], 2));
       if (distance < minDistance) {
         minDistance = distance;
         closestSeed = seed;

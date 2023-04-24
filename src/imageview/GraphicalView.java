@@ -1,11 +1,6 @@
 package imageview;
 
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-import java.awt.Dimension;
-import java.awt.ScrollPane;
-import java.awt.Color;
-import java.awt.Graphics2D;
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -16,10 +11,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import javax.swing.JFrame;
-import javax.swing.JButton;
-import javax.swing.JComboBox;
-import javax.swing.JFileChooser;
+import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 import helpers.HistogramHelper;
@@ -43,6 +35,7 @@ public class GraphicalView extends JFrame implements View {
   private final ImageCanvas imageCanvas;
   private final HistogramGraphPanel histogramGraphPanel;
   private String[] commands = {"Loading commands..."};
+
 
   /**
    * Constructor for the GraphicalView class.
@@ -295,6 +288,8 @@ public class GraphicalView extends JFrame implements View {
               return;
           }
         }
+      } else if (command.contains("mosaic")) {
+        arguments.add(showInputDialog());
       }
       try {
         Response r = controller.operationHandler(command, arguments);
@@ -386,7 +381,7 @@ public class GraphicalView extends JFrame implements View {
       this.imageCanvas.setImage(response.getImage());
       Graphics2D g = (Graphics2D) this.imageCanvas.getGraphics();
       Map<String, List<Double>> allChannelHistogram =
-          HistogramHelper.getAllChannelsHistogram(response.getImage());
+              HistogramHelper.getAllChannelsHistogram(response.getImage());
       this.histogramGraphPanel.setHistogram(allChannelHistogram);
       g.dispose();
       this.setVisible(true);
@@ -402,4 +397,14 @@ public class GraphicalView extends JFrame implements View {
   public void clearView() {
     System.out.println("Unable to clear view at this moment");
   }
+
+  private String showInputDialog() {
+    String inputValue = JOptionPane.showInputDialog(this, "Enter number of Seeds",
+            JOptionPane.INFORMATION_MESSAGE);
+    if (inputValue != null) {
+      return inputValue;
+    }
+    return "";
+  }
+
 }
