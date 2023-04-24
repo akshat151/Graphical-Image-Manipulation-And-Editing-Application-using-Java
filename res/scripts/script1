@@ -54,3 +54,11 @@ save res/SMPTE-red-tint.ppm SMPTE-red-tint
 save res/SMPTE-saved1.png SMPTE
 
 save res/SMPTE-saved2.jpeg SMPTE
+
+#load snow.ppm and call it 'snow'
+load res/SMPTE/snow.ppm snow
+
+#mosaic just the snow image
+mosaic 1000 snow snow_mosaic
+
+save res/snow_mosa.png snow_mosaic

@@ -17,6 +17,7 @@ import imagecontroller.commands.Sharpen;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 /**
@@ -368,60 +369,85 @@ public class ImageImplTest {
 
     // Dither needs a different image to work on
     // The default does not show the dithering effect
-    ImageInterface img = ImageUtil.readPPM("res/koala/koala_100.ppm");
+    ImageInterface img = ImageUtil.readPPM("res/SMPTE/snow.ppm");
 
     ImageInterface imgDither = img.dither();
     assertEquals(imgDither.getSize(), img.getSize());
 
-    ImageInterface imgDither2 = imgHelper.loadImage("res/koala/koala-dithered.ppm");
+    ImageInterface imgDither2 = imgHelper.loadImage("res/SMPTE/snow-dithered.ppm");
 
     assertTrue(imgDither != null);
     assertTrue(imgDither2 != null);
     assertTrue(compareImages(imgDither, imgDither2));
   }
 
-  // @Test
-  // public void saveImageTest() {
-  //   ImageImplHelper imgHelper = new ImageImplHelper();
-  //   System.out.println(img.saveImage("res/SMPTE/SMPTE-save.ppm").getResponse());
-  //   assertTrue(compareImages(
-  //           imgHelper.loadImagePPM("res/SMPTE/SMPTE-save.ppm"),
-  //           imgHelper.loadImagePPM("res/SMPTE/SMPTE-original.ppm")
-  //   ));
-  // }
+  @Test
+  public void mosaicTest() {
 
-  // @Test
-  // public void saveImageJPEGTest() {
-  //   ImageImplHelper imgHelper = new ImageImplHelper();
-  //   System.out.println(img.saveImage("res/SMPTE/SMPTE-save.jpeg").getResponse());
-  //   assertTrue(compareImages(
-  //           imgHelper.loadImage("res/SMPTE/SMPTE-save.jpeg"),
-  //           imgHelper.loadImage("res/SMPTE/SMPTE-original.jpeg"),
-  //         80
-  //   ));
-  // }
+    // Dither needs a different image to work on
+    // The default does not show the dithering effect
+    ImageInterface img = ImageUtil.readPPM("res/SMPTE/snow.ppm");
 
-  // @Test
-  // public void saveImagePNGTest() {
-  //   ImageImplHelper imgHelper = new ImageImplHelper();
-  //   System.out.println(img.saveImage("res/SMPTE/SMPTE-save.png").getResponse());
-  //   assertTrue(compareImages(
-  //           imgHelper.loadImage("res/SMPTE/SMPTE-save.png"),
-  //           imgHelper.loadImage("res/SMPTE/SMPTE-original.png"),
-  //         80
-  //   ));
-  // }
+    ImageInterface imgMosaic = img.mosaic(1000);
+    assertEquals(imgMosaic.getSize(), img.getSize());
 
-  // @Test(expected = IllegalArgumentException.class)
-  // public void saveImageFailNoExtension() {
-  //   img.saveImage("res/SMPTE/SMPTE-save");
-  // }
+    ImageInterface imgMosaic2 = imgHelper.loadImage("res/SMPTE/snow-mosaic.ppm");
 
-  // This will pass when the test is run as root user. Failing the objective of the test.
-  // @Test(expected = IllegalArgumentException.class)
-  // public void saveImageFailInvalidPath() {
-  //   img.saveImage("/SMPTE-save.ppm");
-  // }
+    assertTrue(imgMosaic != null);
+    assertTrue(imgMosaic2 != null);
+    assertTrue(compareImages(imgMosaic, imgMosaic2));
+  }
+
+  @Test
+  public void mosaicTestPPMToBMP() {
+
+    // Dither needs a different image to work on
+    // The default does not show the dithering effect
+    ImageInterface img = ImageUtil.readPPM("res/SMPTE/snow.ppm");
+
+    ImageInterface imgMosaic = img.mosaic(1000);
+    assertEquals(imgMosaic.getSize(), img.getSize());
+
+    ImageInterface imgMosaic2 = imgHelper.loadImage("res/SMPTE/snow-mosaic.bmp");
+
+    assertTrue(imgMosaic != null);
+    assertTrue(imgMosaic2 != null);
+    assertTrue(compareImages(imgMosaic, imgMosaic2));
+  }
+
+  @Test
+  public void mosaicTestPPMToPNG() {
+
+    // Dither needs a different image to work on
+    // The default does not show the dithering effect
+    ImageInterface img = ImageUtil.readPPM("res/SMPTE/snow.ppm");
+
+    ImageInterface imgMosaic = img.mosaic(1000);
+    assertEquals(imgMosaic.getSize(), img.getSize());
+
+    ImageInterface imgMosaic2 = imgHelper.loadImage("res/SMPTE/snow-mosaic.png");
+
+    assertTrue(imgMosaic != null);
+    assertTrue(imgMosaic2 != null);
+    assertTrue(compareImages(imgMosaic, imgMosaic2));
+  }
+
+  @Test
+  public void mosaicTestPPMToJPG() {
+
+    // Dither needs a different image to work on
+    // The default does not show the dithering effect
+    ImageInterface img = ImageUtil.readPPM("res/SMPTE/snow.ppm");
+
+    ImageInterface imgMosaic = img.mosaic(1500);
+    assertEquals(imgMosaic.getSize(), img.getSize());
+
+    ImageInterface imgMosaic2 = imgHelper.loadImage("res/SMPTE/snow-mosaic.jpeg");
+
+    assertTrue(imgMosaic != null);
+    assertTrue(imgMosaic2 != null);
+    assertFalse(compareImages(imgMosaic, imgMosaic2));
+  }
 
   /**
    * Helper method for testing file operations.

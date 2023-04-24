@@ -102,6 +102,11 @@ public class ImageControllerTest {
     public ImageInterface dither() {
       return this;
     }
+
+    @Override
+    public ImageInterface mosaic(int seeds) {
+      return this;
+    }
   }
 
   /**
@@ -519,12 +524,54 @@ public class ImageControllerTest {
     boolean[] operationResArr = new boolean[21];
     Arrays.fill(operationResArr, true);
     String[] commands = new String[]{"load", "load", "load", "brighten", "vertical-flip", "blur",
-        "sharpen", "sepia", "dither", "horizontal-flip", "greyscale", "greyscale", "save", "save",
-        "rgb-split", "brighten", "rgb-combine", "save", "save", "save", "run"};
+            "sharpen", "sepia", "dither", "horizontal-flip", "greyscale", "greyscale", "save",
+            "save", "rgb-split", "brighten", "rgb-combine", "save", "save", "save", "run"};
 
-    String expectedOutput = getExpectedScriptOutput(operationResArr, commands);
-
-    assertEquals(true, compareScriptOutputs(actualOutput, expectedOutput));
+    assertEquals("\u001B[H\u001B[2JAvailable commands:\n"
+            + "\n"
+            + "brighten value img-src img-dest\n"
+            + "sharpen img-src img-dest\n"
+            + "dither img-src img-dest\n"
+            + "Save file-path image-name\n"
+            + "blur img-src img-dest\n"
+            + "greyscale component img-src img-dest\n"
+            + "greyscale img-src img-dest\n"
+            + "horizontal-flip img-src img-dest\n"
+            + "rgb-split img-src img-red img-green img-blue\n"
+            + "sepia img-src img-dest\n"
+            + "rgb-combine img-dest img-red img-green img-blue\n"
+            + "Load file-path image-name\n"
+            + "vertical-flip img-src img-dest\n"
+            + "mosaic num-seeds img-src img-dest\n"
+            + "\n"
+            + "\n"
+            + "To view the available commands again, type \"help\". To quit the program, "
+            + "type \"quit\".\n"
+            + "Enter a command: Success: load\n"
+            + " Success: load\n"
+            + " Success: load\n"
+            + " Success: brighten\n"
+            + " Success: vertical-flip\n"
+            + " Success: blur\n"
+            + " Success: sharpen\n"
+            + " Success: sepia\n"
+            + " Success: dither\n"
+            + " Success: horizontal-flip\n"
+            + " Success: greyscale\n"
+            + " Success: greyscale\n"
+            + " Success: save\n"
+            + " Success: save\n"
+            + " Success: rgb-split\n"
+            + " Success: brighten\n"
+            + " Success: rgb-combine\n"
+            + " Success: save\n"
+            + " Success: save\n"
+            + " Success: save\n"
+            + " Success: load\n"
+            + " Success: mosaic\n"
+            + " Success: save\n"
+            + " Success: run\n"
+            + " Enter a command: ", actualOutput);
   }
 
   @Test
@@ -825,6 +872,99 @@ public class ImageControllerTest {
             new boolean[]{true, false}, new String[]{"load", "dither"});
 
     assertEquals(true, compareOutputs(actualOutput, expectedOutput));
+  }
+
+  @Test
+  public void testMosaic_success() {
+    TerminalViewTest.ReadableInputStream inputStream = new ReadableInputStreamQuitDefault(
+            "load res/SMPTE/snow.ppm snow\n"
+                    + " mosaic 500 snow snow-mosaic");
+    TerminalViewTest.WritableOutputStream outputStream =
+            new TerminalViewTest.WritableOutputStream();
+    getController(inputStream, outputStream).beginApp();
+    String actualOutput = outputStream.getOutput();
+    String expectedOutput = getExpectedOutput(
+            new boolean[]{true, true}, new String[]{"load", "mosaic"});
+
+    assertEquals(true, compareOutputs(actualOutput, expectedOutput));
+  }
+
+  @Test
+  public void testMosaic_fail_wrongArgs() {
+    TerminalViewTest.ReadableInputStream inputStream = new ReadableInputStreamQuitDefault(
+            "load res/SMPTE/snow.ppm snow\n mosaic snow");
+    TerminalViewTest.WritableOutputStream outputStream =
+            new TerminalViewTest.WritableOutputStream();
+    getController(inputStream, outputStream).beginApp();
+    String actualOutput = outputStream.getOutput();
+    String expectedOutput = getExpectedOutput(
+            new boolean[]{true, false}, new String[]{"load", "mosaic"});
+
+    assertEquals(true, compareOutputs(actualOutput, expectedOutput));
+  }
+
+  @Test
+  public void testMosaic_fail_wrongImage() {
+    TerminalViewTest.ReadableInputStream inputStream = new ReadableInputStreamQuitDefault(
+            "load res/SMPTE/snow.ppm snow\n mosaic 10 wrongSMPTE snow-s");
+    TerminalViewTest.WritableOutputStream outputStream =
+            new TerminalViewTest.WritableOutputStream();
+    getController(inputStream, outputStream).beginApp();
+    String actualOutput = outputStream.getOutput();
+    String expectedOutput = getExpectedOutput(
+            new boolean[]{true, false}, new String[]{"load", "mosaic"});
+
+    assertEquals(true, compareOutputs(actualOutput, expectedOutput));
+  }
+
+  @Test
+  public void scriptTest() {
+    TerminalViewTest.ReadableInputStream inputStream =
+            new ReadableInputStreamQuitDefault("run res/SMPTE/script1");
+    TerminalViewTest.WritableOutputStream outputStream =
+            new TerminalViewTest.WritableOutputStream();
+    getController(inputStream, outputStream).beginApp();
+    String actualOutput = outputStream.getOutput();
+
+    assertEquals("\u001B[H\u001B[2JAvailable commands:\n"
+            + "\n"
+            + "brighten value img-src img-dest\n"
+            + "sharpen img-src img-dest\n"
+            + "dither img-src img-dest\n"
+            + "Save file-path image-name\n"
+            + "blur img-src img-dest\n"
+            + "greyscale component img-src img-dest\n"
+            + "greyscale img-src img-dest\n"
+            + "horizontal-flip img-src img-dest\n"
+            + "rgb-split img-src img-red img-green img-blue\n"
+            + "sepia img-src img-dest\n"
+            + "rgb-combine img-dest img-red img-green img-blue\n"
+            + "Load file-path image-name\n"
+            + "vertical-flip img-src img-dest\n"
+            + "mosaic num-seeds img-src img-dest\n"
+            + "\n"
+            + "\n"
+            + "To view the available commands again, type \"help\". To quit the program, "
+            + "type \"quit\".\n"
+            + "Enter a command: Success: load\n"
+            + " Success: load\n"
+            + " Success: load\n"
+            + " Success: brighten\n"
+            + " Success: vertical-flip\n"
+            + " Success: blur\n"
+            + " Success: sharpen\n"
+            + " Success: sepia\n"
+            + " Success: dither\n"
+            + " Success: horizontal-flip\n"
+            + " Success: greyscale\n"
+            + " Success: greyscale\n"
+            + " Success: rgb-split\n"
+            + " Success: brighten\n"
+            + " Success: rgb-combine\n"
+            + " Success: load\n"
+            + " Success: mosaic\n"
+            + " Success: run\n"
+            + " Enter a command: ", actualOutput);
   }
 
   // This test will more often fail with a stack overflow error than a timeout error. This is

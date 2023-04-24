@@ -21,16 +21,17 @@ public class Mosaic implements ImageCommandInterface {
 
     Stack<String> workedOn = imageStore.getStack();
 
-    if (arguments.size() == 1 && !workedOn.isEmpty()) {
+    if (arguments.size() == 0 && workedOn.size() > 0) {
+      arguments.add("1000");
+      String source = workedOn.peek();
+      arguments.add(source);
+      arguments.add(source + Instant.now());
+    } else if (arguments.size() == 1 && !workedOn.isEmpty()) {
       String source = workedOn.peek();
       arguments.add(source);
       arguments.add(source + Instant.now());
     }
     CommandUtil.fixArgs(workedOn, arguments);
-
-    if (arguments.size() == 0) {
-      throw new IllegalArgumentException("Mosaic command needs seed value");
-    }
 
     Map<String, ImageInterface> images = imageStore.getImages();
     CommandUtil.validateArgCount("Mosaic", arguments, 3);

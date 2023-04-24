@@ -1,11 +1,11 @@
 #load SMPTE.ppm and call it 'SMPTE'
-load SMPTE-original.ppm SMPTE
+load res/SMPTE/SMPTE-original.ppm SMPTE
 
 #load SMPTE.png and call it 'SMPTE'
-load SMPTE-original.png SMPTE-png
+load res/SMPTE/SMPTE-original.png SMPTE-png
 
 #load SMPTE.jpeg and call it 'SMPTE'
-load SMPTE-original.jpeg SMPTE-jpeg
+load res/SMPTE/SMPTE-original.jpeg SMPTE-jpeg
 
 #brighten SMPTE by adding 10
 brighten 10 SMPTE SMPTE-brighter
@@ -35,10 +35,10 @@ greyscale red-component SMPTE SMPTE-greyscale
 greyscale SMPTE SMPTE-greyscale-ct
 
 #save SMPTE-brighter
-save SMPTE-brighter.ppm SMPTE-brighter
+#save res/SMPTE-brighter.ppm SMPTE-brighter
 
 #save SMPTE-greyscale
-save SMPTE-gs.ppm SMPTE-greyscale
+#save res/SMPTE-gs.ppm SMPTE-greyscale
 
 #give the SMPTE a red tint
 rgb-split SMPTE SMPTE-red SMPTE-green SMPTE-blue
@@ -49,8 +49,16 @@ brighten 50 SMPTE-red SMPTE-red
 #combine them back, but by using the brightened red we get a red tint
 rgb-combine SMPTE-red-tint SMPTE-red SMPTE-green SMPTE-blue
 
-save SMPTE-red-tint.ppm SMPTE-red-tint
+#save SMPTE-red-tint.ppm SMPTE-red-tint
 
-save SMPTE-saved1.png SMPTE
+#save SMPTE-saved1.png SMPTE
 
-save SMPTE-saved2.jpeg SMPTE
+#save SMPTE-saved2.jpeg SMPTE
+
+#load snow.ppm and call it 'snow'
+load res/SMPTE/snow.ppm snow
+
+#mosaic just the snow image
+mosaic 1000 snow snow_mosaic
+
+#save snow_mosa.png snow_mosaic

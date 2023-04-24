@@ -99,6 +99,11 @@ public class GraphicalControllerTest {
     public ImageInterface dither() {
       return this;
     }
+
+    @Override
+    public ImageInterface mosaic(int seeds) {
+      return this;
+    }
   }
 
   MockImgImplHelper imgHelper = new MockImgImplHelper();
@@ -228,6 +233,19 @@ public class GraphicalControllerTest {
     String actualOutput = output.getResponse();
     String expectedOutput = getExpectedOutput(
             new boolean[]{true}, new String[]{"dither"});
+
+    assertEquals(true, compareOutputs(actualOutput, expectedOutput));
+  }
+
+  @Test
+  public void testMosaic_success() {
+
+    GraphicalController controller = getController();
+    List<String> arguments = new ArrayList<>();
+    Response output = controller.operationHandler("mosaic", arguments);
+    String actualOutput = output.getResponse();
+    String expectedOutput = getExpectedOutput(
+            new boolean[]{true}, new String[]{"mosaic"});
 
     assertEquals(true, compareOutputs(actualOutput, expectedOutput));
   }
