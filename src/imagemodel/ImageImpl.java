@@ -418,6 +418,7 @@ public class ImageImpl implements ImageInterface {
     return new ImageImpl(mosaicImage);
   }
 
+  //create pixel clusters for implementing mosaic operation.
   private Map<int[], List<PixelInterface>> createClusters(List<int[]> seeds, int width,
                                                           int height) {
     Map<int[], List<PixelInterface>> clusters = new HashMap<>();
@@ -434,6 +435,7 @@ public class ImageImpl implements ImageInterface {
     return clusters;
   }
 
+  //compute the cluster colors for mosaic operation.
   private Map<int[], PixelInterface> computeClusterColors(Map<int[],
           List<PixelInterface>> clusters) {
     Map<int[], PixelInterface> clusterColors = new HashMap<>();
@@ -446,6 +448,7 @@ public class ImageImpl implements ImageInterface {
     return clusterColors;
   }
 
+  //create mosaic image after mosaic operation.
   private List<List<PixelInterface>> createMosaicImage(int width, int height, List<int[]> seeds,
                                                        Map<int[], PixelInterface> clusterColors) {
     List<List<PixelInterface>> mosaicImage = new ArrayList<>();
@@ -462,7 +465,7 @@ public class ImageImpl implements ImageInterface {
     return mosaicImage;
   }
 
-
+  //generate random seeds list for mosaic operation.
   private List<int[]> generateRandomSeeds(int numSeeds, int width, int height) {
     List<int[]> seeds = new ArrayList<>();
     Random random = new Random(200);
@@ -474,6 +477,7 @@ public class ImageImpl implements ImageInterface {
     return seeds;
   }
 
+  //find the closest seed for the given pixel for mosaic operation.
   private int[] findClosestSeed(int[] pixel, List<int[]> seeds) {
     double minDistance = Double.MAX_VALUE;
     int[] closestSeed = null;
@@ -488,6 +492,7 @@ public class ImageImpl implements ImageInterface {
     return closestSeed;
   }
 
+  //compute average color for pixels for mosaic operation.
   private PixelInterface computeAverageColor(List<PixelInterface> colors) {
     int r = 0;
     int g = 0;

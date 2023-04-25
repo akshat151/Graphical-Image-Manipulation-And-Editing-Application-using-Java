@@ -2,22 +2,35 @@ Code Review of Provider's Code
 
 Design Critique:
 
-The overall design of the provider's code is fairly robust and scalable. The modularity of the codebase makes it easy to add new features and extend existing ones. However, the interfaces between different components of the system could be more flexible to allow for greater customization by the users.
+The provider's code has a fairly robust overall design. The modularity of the codebase makes it easy to add new features. However, the existing design and interfaces between different components of the system could be made more flexible to allow for interface extension without violating the Open-close solid design principles, which are crucial for supporting future changes in the existing code which adheres to the SOLID design principles.
+
 
 Implementation Critique:
 
-The implementation of the code is generally good, with some areas for improvement. The use of appropriate data structures and algorithms is commendable, but there are some performance bottlenecks that need to be addressed. Additionally, some of the code is overly verbose and could be simplified to make it more readable.
+We had to request changes from our code providers to support the bmp image file format required for Assignment 5. After the changes were made, we received an updated code base that supported IME operations through both the command line and gui for the .bmp image file formats. We needed the change in their existing code base to perform image mosaicking operation for Assignment 7 in all the supported image file formats (png, bmp, ppm, jpeg).
+
+Furthermore, the Dithering operation is not implemented correctly, as the output image after the dithering operation does not look correct. Also, the dithering code is not modularized, and the entire code logic is written inside one single method, making the method length longer than necessary.
+
+Overall, the code implementation is generally good, with some areas for improvement as mentioned above.
+
 
 Documentation Critique:
 
-The codebase is reasonably well-documented, but there are some areas where the documentation could be improved. Some modules are lacking in documentation, which makes it harder for developers to understand how they work. Additionally, there is a need for more detailed explanations of the interfaces between different components.
+The codebase is reasonably well-documented.
+
 
 Design/Code Strengths:
 
-The codebase has a number of strengths. The modular design makes it easy to add new features and extend existing ones. Additionally, the use of appropriate data structures and algorithms has ensured that the code is efficient and scalable.
+The codebase has a number of strengths, such as proper error handling, effective use of abstraction where necessary, and a modular design that makes it easy to add new features. Additionally, the tests written by the providers of our code were quite extensive and easy to understand and extend.
 
 Design/Code Limitations and Suggestions on How to Address Them:
 
-There are some limitations in the design of the codebase that need to be addressed. For instance, the interfaces between different components of the system could be made more flexible to allow for greater customization by the users. Additionally, some of the code is overly verbose and could be simplified to make it more readable. To address these issues, it would be beneficial to have more detailed documentation, as well as code refactoring to improve readability and performance.
+There are some limitations in the codebase design that need to be addressed. For example, instead of using hard-coded strings everywhere in the code implementation, there should be a separate constants file to store all the hard-coded strings. This separation of hard-coded strings into a constants file ensures that the same hard-coded strings can be used throughout the code without having to write them repeatedly, and allows us to change the text inside the Constants file whenever required without making changes to the existing codebase.
 
-In summary, the provider's codebase is robust and scalable, but there is room for improvement in areas such as interface flexibility, performance, and code readability. Addressing these issues will make the code easier to use and customize, and will ultimately lead to a better user experience. Overall, the codebase is a solid foundation for further development, and with some modifications and improvements, it could become even more effective and efficient.
+Furthermore, the GUI is not resizable, and the current JFrame does not implement image horizontal scrollability correctly, limiting visualization of large-sized image files (images larger than the image panel width and height). 
+
+Also, the interfaces between different components of the system could also be made more flexible to allow for greater customization by the users. Currently, the ImageInterface is tightly coupled with the entire codebase, and any attempts to extend the existing interface to support newer operations would require changes to the entire existing codebase, which would violate the Open-close solid design principles.
+In short, the ImageInterface and the rest of the code should not be tightly coupled with each other.
+
+Summary :
+In summary, the provider's codebase is robust, but there is room for improvement in areas such as interface flexibility and GUI implementation. Addressing these issues will make the code easier to use and customize, leading to a better user experience. Overall, the codebase is a solid foundation for further development, and with some modifications and improvements, it could become even more effective and efficient.
