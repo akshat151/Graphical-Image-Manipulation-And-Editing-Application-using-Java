@@ -24,6 +24,7 @@ import javax.swing.JComboBox;
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
+import helpers.Constants;
 import helpers.HistogramHelper;
 import helpers.Response;
 import imagecontroller.GraphicHelper;
@@ -54,7 +55,7 @@ public class GraphicalView extends JFrame implements View {
    */
   public GraphicalView(String caption) {
     super(caption);
-    setSize(1280, 820);
+    setSize(1680, 1020);
     setLocation(50, 50);
     this.getContentPane().setLayout(new GridBagLayout());
 
@@ -164,7 +165,7 @@ public class GraphicalView extends JFrame implements View {
     commandSet.add("rgb-split red");
     commandSet.add("rgb-split green");
     commandSet.add("rgb-split blue");
-    commandSet.add("mosaic");
+    commandSet.add(Constants.MOSAIC);
     commands = new String[commandSet.size()];
     commands = commandSet.toArray(commands);
 
@@ -299,7 +300,7 @@ public class GraphicalView extends JFrame implements View {
               return;
           }
         }
-      } else if (command.contains("mosaic")) {
+      } else if (command.contains(Constants.MOSAIC)) {
         arguments.add(showInputDialog());
       }
       try {
@@ -411,7 +412,7 @@ public class GraphicalView extends JFrame implements View {
   }
 
   private String showInputDialog() {
-    String inputValue = JOptionPane.showInputDialog(this, "Enter number of Seeds",
+    String inputValue = JOptionPane.showInputDialog(this, Constants.MOSAIC_SEEDS_MESSAGE,
             JOptionPane.INFORMATION_MESSAGE);
     if (inputValue != null) {
       return inputValue;

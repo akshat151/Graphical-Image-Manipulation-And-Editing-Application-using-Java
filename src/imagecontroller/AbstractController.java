@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import helpers.Constants;
 import helpers.ImageImplHelper;
 import helpers.Response;
 import imagecontroller.commands.Blur;
@@ -62,7 +63,7 @@ public abstract class AbstractController implements ImageControllerInterface {
     knownCommands.put("sharpen", new Sharpen());
     knownCommands.put("sepia", new Sepia());
     knownCommands.put("dither", new Dither());
-    knownCommands.put("mosaic", new Mosaic());
+    knownCommands.put(Constants.MOSAIC, new Mosaic());
   }
 
   /**

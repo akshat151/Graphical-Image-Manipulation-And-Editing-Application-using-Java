@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Stack;
 
+import helpers.Constants;
 import imagecontroller.ImageCommandInterface;
 import imagemodel.ImageInterface;
 import imagemodel.ImageStore;
@@ -22,7 +23,7 @@ public class Mosaic implements ImageCommandInterface {
     Stack<String> workedOn = imageStore.getStack();
 
     if (arguments.size() == 0 && workedOn.size() > 0) {
-      arguments.add("1000");
+      arguments.add(Constants.NUM_OF_SEEDS);
       String source = workedOn.peek();
       arguments.add(source);
       arguments.add(source + Instant.now());
@@ -34,9 +35,9 @@ public class Mosaic implements ImageCommandInterface {
     CommandUtil.fixArgs(workedOn, arguments);
 
     Map<String, ImageInterface> images = imageStore.getImages();
-    CommandUtil.validateArgCount("Mosaic", arguments, 3);
+    CommandUtil.validateArgCount(Constants.MOSAIC_CAP, arguments, 3);
     CommandUtil.validateImageExists(images, arguments.get(1));
-    if (!arguments.get(0).equals("")) {
+    if (!arguments.get(0).equals(Constants.EMPTY_MSG)) {
       int seeds = Integer.parseInt(arguments.get(0));
       if (seeds > 0) {
         ImageInterface result = images.get(arguments.get(1))
@@ -44,13 +45,13 @@ public class Mosaic implements ImageCommandInterface {
         images.put(arguments.get(2), result);
         workedOn.push(arguments.get(2));
       } else {
-        throw new IllegalArgumentException("Please enter positive number of seeds");
+        throw new IllegalArgumentException(Constants.MOSAIC_COMMAND_ERR_MESSAGE);
       }
     }
   }
 
   @Override
   public String toString() {
-    return "mosaic num-seeds img-src img-dest";
+    return Constants.MOSAIC_COMMAND;
   }
 }
