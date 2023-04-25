@@ -4,6 +4,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.io.BufferedReader;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
@@ -11,6 +12,8 @@ import java.util.ArrayList;
 
 import helpers.ImageImplHelper;
 import helpers.ImageUtil;
+import helpers.loaders.BMPLoader;
+import helpers.loaders.PNGLoader;
 import imagecontroller.commands.Blur;
 import imagecontroller.commands.Sharpen;
 
@@ -384,8 +387,6 @@ public class ImageImplTest {
   @Test
   public void mosaicTest() {
 
-    // Dither needs a different image to work on
-    // The default does not show the dithering effect
     ImageInterface img = ImageUtil.readPPM("res/SMPTE/snow.ppm");
 
     ImageInterface imgMosaic = img.mosaic(1000);
@@ -401,8 +402,6 @@ public class ImageImplTest {
   @Test
   public void mosaicTestPPMToBMP() {
 
-    // Dither needs a different image to work on
-    // The default does not show the dithering effect
     ImageInterface img = ImageUtil.readPPM("res/SMPTE/snow.ppm");
 
     ImageInterface imgMosaic = img.mosaic(1000);
@@ -418,8 +417,6 @@ public class ImageImplTest {
   @Test
   public void mosaicTestPPMToPNG() {
 
-    // Dither needs a different image to work on
-    // The default does not show the dithering effect
     ImageInterface img = ImageUtil.readPPM("res/SMPTE/snow.ppm");
 
     ImageInterface imgMosaic = img.mosaic(1000);
@@ -435,14 +432,140 @@ public class ImageImplTest {
   @Test
   public void mosaicTestPPMToJPG() {
 
-    // Dither needs a different image to work on
-    // The default does not show the dithering effect
     ImageInterface img = ImageUtil.readPPM("res/SMPTE/snow.ppm");
 
     ImageInterface imgMosaic = img.mosaic(1500);
     assertEquals(imgMosaic.getSize(), img.getSize());
 
     ImageInterface imgMosaic2 = imgHelper.loadImage("res/SMPTE/snow-mosaic.jpeg");
+
+    assertTrue(imgMosaic != null);
+    assertTrue(imgMosaic2 != null);
+    assertFalse(compareImages(imgMosaic, imgMosaic2));
+  }
+
+  @Test
+  public void mosaicTestPNGToBMP() throws IOException {
+
+    FileInputStream stream = new FileInputStream("res/SMPTE/snow.png");
+    ImageInterface img = new PNGLoader().loadImage(stream);
+
+    ImageInterface imgMosaic = img.mosaic(1000);
+    assertEquals(imgMosaic.getSize(), img.getSize());
+
+    ImageInterface imgMosaic2 = imgHelper.loadImage("res/SMPTE/snow-mosaic.bmp");
+
+    assertTrue(imgMosaic != null);
+    assertTrue(imgMosaic2 != null);
+    assertTrue(compareImages(imgMosaic, imgMosaic2));
+  }
+
+  @Test
+  public void mosaicTestPNGToPPM() throws IOException {
+
+    FileInputStream stream = new FileInputStream("res/SMPTE/snow.png");
+    ImageInterface img = new PNGLoader().loadImage(stream);
+
+    ImageInterface imgMosaic = img.mosaic(1000);
+    assertEquals(imgMosaic.getSize(), img.getSize());
+
+    ImageInterface imgMosaic2 = imgHelper.loadImage("res/SMPTE/snow-mosaic.ppm");
+
+    assertTrue(imgMosaic != null);
+    assertTrue(imgMosaic2 != null);
+    assertTrue(compareImages(imgMosaic, imgMosaic2));
+  }
+
+  @Test
+  public void mosaicTestPNGToJPG() throws IOException {
+
+    FileInputStream stream = new FileInputStream("res/SMPTE/snow.png");
+    ImageInterface img = new PNGLoader().loadImage(stream);
+
+    ImageInterface imgMosaic = img.mosaic(1000);
+    assertEquals(imgMosaic.getSize(), img.getSize());
+
+    ImageInterface imgMosaic2 = imgHelper.loadImage("res/SMPTE/snow-mosaic.jpeg");
+
+    assertTrue(imgMosaic != null);
+    assertTrue(imgMosaic2 != null);
+    assertFalse(compareImages(imgMosaic, imgMosaic2));
+  }
+
+  @Test
+  public void mosaicTestBMPToPPM() throws IOException {
+
+    FileInputStream stream = new FileInputStream("res/SMPTE/snow.bmp");
+    ImageInterface img = new BMPLoader().loadImage(stream);
+
+    ImageInterface imgMosaic = img.mosaic(1000);
+    assertEquals(imgMosaic.getSize(), img.getSize());
+
+    ImageInterface imgMosaic2 = imgHelper.loadImage("res/SMPTE/snow-mosaic.ppm");
+
+    assertTrue(imgMosaic != null);
+    assertTrue(imgMosaic2 != null);
+    assertTrue(compareImages(imgMosaic, imgMosaic2));
+  }
+
+  @Test
+  public void mosaicTestBMPToPNG() throws IOException {
+
+    FileInputStream stream = new FileInputStream("res/SMPTE/snow.bmp");
+    ImageInterface img = new BMPLoader().loadImage(stream);
+
+    ImageInterface imgMosaic = img.mosaic(1000);
+    assertEquals(imgMosaic.getSize(), img.getSize());
+
+    ImageInterface imgMosaic2 = imgHelper.loadImage("res/SMPTE/snow-mosaic.png");
+
+    assertTrue(imgMosaic != null);
+    assertTrue(imgMosaic2 != null);
+    assertTrue(compareImages(imgMosaic, imgMosaic2));
+  }
+
+  @Test
+  public void mosaicTestBMPToJPG() throws IOException {
+
+    FileInputStream stream = new FileInputStream("res/SMPTE/snow.bmp");
+    ImageInterface img = new BMPLoader().loadImage(stream);
+
+    ImageInterface imgMosaic = img.mosaic(1000);
+    assertEquals(imgMosaic.getSize(), img.getSize());
+
+    ImageInterface imgMosaic2 = imgHelper.loadImage("res/SMPTE/snow-mosaic.jpeg");
+
+    assertTrue(imgMosaic != null);
+    assertTrue(imgMosaic2 != null);
+    assertFalse(compareImages(imgMosaic, imgMosaic2));
+  }
+
+  @Test
+  public void mosaicTestJPEGToPPM() throws IOException {
+
+    FileInputStream stream = new FileInputStream("res/SMPTE/snow.jpeg");
+    ImageInterface img = new BMPLoader().loadImage(stream);
+
+    ImageInterface imgMosaic = img.mosaic(1000);
+    assertEquals(imgMosaic.getSize(), img.getSize());
+
+    ImageInterface imgMosaic2 = imgHelper.loadImage("res/SMPTE/snow-mosaic.ppm");
+
+    assertTrue(imgMosaic != null);
+    assertTrue(imgMosaic2 != null);
+    assertFalse(compareImages(imgMosaic, imgMosaic2));
+  }
+
+  @Test
+  public void mosaicTestJPEGToPNG() throws IOException {
+
+    FileInputStream stream = new FileInputStream("res/SMPTE/snow.jpeg");
+    ImageInterface img = new BMPLoader().loadImage(stream);
+
+    ImageInterface imgMosaic = img.mosaic(1000);
+    assertEquals(imgMosaic.getSize(), img.getSize());
+
+    ImageInterface imgMosaic2 = imgHelper.loadImage("res/SMPTE/snow-mosaic.png");
 
     assertTrue(imgMosaic != null);
     assertTrue(imgMosaic2 != null);
@@ -519,7 +642,7 @@ public class ImageImplTest {
    * @param img1 ImageInterface object a
    * @param img2 ImageInterface object b
    * @param threshold threshold for pixel difference
-   * @return
+   * @return the boolean value if the two images are same or not.
    */
   public static boolean compareImages(ImageInterface img1, ImageInterface img2, double threshold) {
     List<List<PixelInterface>> img1Arr = img1.getImageArray();

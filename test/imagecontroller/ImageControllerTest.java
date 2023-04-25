@@ -523,9 +523,6 @@ public class ImageControllerTest {
     String actualOutput = outputStream.getOutput();
     boolean[] operationResArr = new boolean[21];
     Arrays.fill(operationResArr, true);
-    String[] commands = new String[]{"load", "load", "load", "brighten", "vertical-flip", "blur",
-            "sharpen", "sepia", "dither", "horizontal-flip", "greyscale", "greyscale", "save",
-            "save", "rgb-split", "brighten", "rgb-combine", "save", "save", "save", "run"};
 
     assertEquals("\u001B[H\u001B[2JAvailable commands:\n"
             + "\n"
