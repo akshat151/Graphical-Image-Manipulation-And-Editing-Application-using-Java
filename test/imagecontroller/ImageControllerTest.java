@@ -915,6 +915,74 @@ public class ImageControllerTest {
   }
 
   @Test
+  public void testMosaic_fail_NegativeSeed() {
+    TerminalViewTest.ReadableInputStream inputStream = new ReadableInputStreamQuitDefault(
+            "load res/SMPTE/snow.ppm snow\n mosaic -1000 snow snow-s");
+    TerminalViewTest.WritableOutputStream outputStream =
+            new TerminalViewTest.WritableOutputStream();
+    getController(inputStream, outputStream).beginApp();
+    String actualOutput = outputStream.getOutput();
+
+    assertEquals("\u001B[H\u001B[2JAvailable commands:\n"
+            + "\n"
+            + "brighten value img-src img-dest\n"
+            + "sharpen img-src img-dest\n"
+            + "dither img-src img-dest\n"
+            + "Save file-path image-name\n"
+            + "blur img-src img-dest\n"
+            + "greyscale component img-src img-dest\n"
+            + "greyscale img-src img-dest\n"
+            + "horizontal-flip img-src img-dest\n"
+            + "rgb-split img-src img-red img-green img-blue\n"
+            + "sepia img-src img-dest\n"
+            + "rgb-combine img-dest img-red img-green img-blue\n"
+            + "Load file-path image-name\n"
+            + "vertical-flip img-src img-dest\n"
+            + "mosaic num-seeds img-src img-dest\n"
+            + "\n"
+            + "\n"
+            + "To view the available commands again, type \"help\". To quit the program, "
+            + "type \"quit\".\n"
+            + "Enter a command: Success: load\n"
+            + " Enter a command: Failure: Please enter positive number of seeds "
+            + "Enter a command: ", actualOutput);
+  }
+
+  @Test
+  public void testMosaic_fail_CharacterSeed() {
+    TerminalViewTest.ReadableInputStream inputStream = new ReadableInputStreamQuitDefault(
+            "load res/SMPTE/snow.ppm snow\n mosaic gth snow snow-s");
+    TerminalViewTest.WritableOutputStream outputStream =
+            new TerminalViewTest.WritableOutputStream();
+    getController(inputStream, outputStream).beginApp();
+    String actualOutput = outputStream.getOutput();
+
+    assertEquals("\u001B[H\u001B[2JAvailable commands:\n"
+            + "\n"
+            + "brighten value img-src img-dest\n"
+            + "sharpen img-src img-dest\n"
+            + "dither img-src img-dest\n"
+            + "Save file-path image-name\n"
+            + "blur img-src img-dest\n"
+            + "greyscale component img-src img-dest\n"
+            + "greyscale img-src img-dest\n"
+            + "horizontal-flip img-src img-dest\n"
+            + "rgb-split img-src img-red img-green img-blue\n"
+            + "sepia img-src img-dest\n"
+            + "rgb-combine img-dest img-red img-green img-blue\n"
+            + "Load file-path image-name\n"
+            + "vertical-flip img-src img-dest\n"
+            + "mosaic num-seeds img-src img-dest\n"
+            + "\n"
+            + "\n"
+            + "To view the available commands again, type \"help\". To quit the program, "
+            + "type \"quit\".\n"
+            + "Enter a command: Success: load\n"
+            + " Enter a command: Failure: For input string: \"gth\" "
+            + "Enter a command: ", actualOutput);
+  }
+
+  @Test
   public void scriptTest() {
     TerminalViewTest.ReadableInputStream inputStream =
             new ReadableInputStreamQuitDefault("run res/SMPTE/script1");

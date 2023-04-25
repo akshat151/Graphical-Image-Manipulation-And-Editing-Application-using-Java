@@ -400,6 +400,21 @@ public class ImageImplTest {
   }
 
   @Test
+  public void mosaicTestForNegativeSeed() {
+
+    ImageInterface img = ImageUtil.readPPM("res/SMPTE/snow.ppm");
+
+    ImageInterface imgMosaic = img.mosaic(-1000);
+    assertEquals(imgMosaic.getSize(), img.getSize());
+
+    ImageInterface imgMosaic2 = imgHelper.loadImage("res/SMPTE/snow-mosaic.ppm");
+
+    assertTrue(imgMosaic != null);
+    assertTrue(imgMosaic2 != null);
+    assertFalse(compareImages(imgMosaic, imgMosaic2));
+  }
+
+  @Test
   public void mosaicTestPPMToBMP() {
 
     ImageInterface img = ImageUtil.readPPM("res/SMPTE/snow.ppm");
@@ -412,6 +427,21 @@ public class ImageImplTest {
     assertTrue(imgMosaic != null);
     assertTrue(imgMosaic2 != null);
     assertTrue(compareImages(imgMosaic, imgMosaic2));
+  }
+
+  @Test
+  public void mosaicTestPPMToBMPNegativeSeed() {
+
+    ImageInterface img = ImageUtil.readPPM("res/SMPTE/snow.ppm");
+
+    ImageInterface imgMosaic = img.mosaic(-1000);
+    assertEquals(imgMosaic.getSize(), img.getSize());
+
+    ImageInterface imgMosaic2 = imgHelper.loadImage("res/SMPTE/snow-mosaic.bmp");
+
+    assertTrue(imgMosaic != null);
+    assertTrue(imgMosaic2 != null);
+    assertFalse(compareImages(imgMosaic, imgMosaic2));
   }
 
   @Test

@@ -15,6 +15,8 @@ import imagemodel.Kernel;
 import imageview.GraphicalView;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 /**
  * Test class for GraphicalController. This class tests the functionality of GraphicalController
@@ -247,7 +249,23 @@ public class GraphicalControllerTest {
     String expectedOutput = getExpectedOutput(
             new boolean[]{true}, new String[]{"mosaic"});
 
-    assertEquals(true, compareOutputs(actualOutput, expectedOutput));
+    assertTrue(compareOutputs(actualOutput, expectedOutput));
+  }
+
+  @Test
+  public void testMosaic_Fail_NegativeSeeds() {
+
+    GraphicalController controller = getController();
+    List<String> arguments = new ArrayList<>();
+    arguments.add("-1000");
+    arguments.add("snow");
+    arguments.add("snow_m");
+    Response output = controller.operationHandler("mosaic", arguments);
+    String actualOutput = output.getResponse();
+    String expectedOutput = getExpectedOutput(
+            new boolean[]{true}, new String[]{"mosaic"});
+
+    assertFalse(compareOutputs(actualOutput, expectedOutput));
   }
 
   private String getExpectedOutput(boolean[] successArr, String[] commands) {

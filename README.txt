@@ -11,6 +11,8 @@ Image mosaicking implementation via Script command : Y
 Image mosaicing implementation from GUI: Y
 Image mosaicing implementation from GUI where the GUI Mosaic option asks for number of seeds to apply to the mosaic implementation from the user: Y
 
+Histogram visualization from GUI: Y
+
 Import/export features:
 
 Load a PPM file implementation: Y

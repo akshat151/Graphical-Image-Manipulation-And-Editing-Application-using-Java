@@ -51,6 +51,11 @@ Sepia implementation: Y
 Script command for sepia: Y
 Sepia from GUI: Y
 
+Image mosaicking implementation through Command line: Y
+Image mosaicking implementation via Script command : Y
+Image mosaicing implementation from GUI: Y
+Image mosaicing implementation from GUI where the GUI Mosaic option asks for number of seeds to apply to the mosaic implementation from the user: Y
+
 Histogram visualization from GUI: Y
 
 Program:
