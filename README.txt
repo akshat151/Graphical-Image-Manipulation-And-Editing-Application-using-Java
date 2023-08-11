@@ -4,7 +4,7 @@ Symbol Meaning
 Y - yes
 N - no
 
-Image manipulations for Assignment 7:
+Image Editing Application:
 
 Image mosaicking implementation through Command line: Y
 Image mosaicking implementation via Script command : Y
@@ -31,8 +31,6 @@ Save a PNG/JPEG/BMP file implementation: Y
 Script command to save a PNG/JPEG/BMP file: Y
 Save PNG/JPEG/BMP file from GUI: Y
 
-
-Assignment 7 Specific Changes - :
 
 Project Name: Graphical Image Manipulation And Editing
 
@@ -82,15 +80,3 @@ In View Section :-
 2. Added the mosaic action listeners in the existing manageListeners method of GraphicalView Class.
 3. Added the mosaic command set in the existing setup(Set<String> commandSet) method of GraphicalView Class.
 4. Added showInputDialog() method in the GraphicalView Class to get the number of seeds to apply to the image for mosaicking from the user.
-
-
-Citation:
-
-Citation for Snow image :
-I formally state that the image, named snow, which is utilized in this project is my property, and it is free to use without any restrictions.
-
-
-Citation for SMPTE image :
-Image Citation:
-File:SMPTE Color Bars.svg. In Wikipedia
-. https://commons.wikimedia.org/wiki/File:SMPTE_Color_Bars.svg
