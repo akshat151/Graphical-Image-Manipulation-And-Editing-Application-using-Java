@@ -1,82 +1,87 @@
-Code status:
+📸 Graphical Image Manipulation and Editing
 
-Symbol Meaning
-Y - yes
-N - no
+A powerful Java-based image editing application that supports a wide range of features for image manipulation through a Graphical User Interface (GUI), Command-Line Interface (CLI), and Script-based automation. Designed with extensibility in mind, the project follows a robust Model-View-Controller (MVC) architecture, making it adaptable for future enhancements.
 
-Image Editing Application:
+⸻
 
-Image mosaicking implementation through Command line: Y
-Image mosaicking implementation via Script command : Y
-Image mosaicing implementation from GUI: Y
-Image mosaicing implementation from GUI where the GUI Mosaic option asks for number of seeds to apply to the mosaic implementation from the user: Y
+✅ Feature Overview
 
-Histogram visualization from GUI: Y
+Feature	Command Line	Script	GUI
+Image Mosaicking	✔️	✔️	✔️
+Mosaic with Seed Input via GUI	✖️	✖️	✔️
+Histogram Visualization	✖️	✖️	✔️
 
-Import/export features:
+📤 Import / Export Support
 
-Load a PPM file implementation: Y
-Script command to load a PPM file: Y
-Load PPM file from GUI: Y
-
-Load a PNG/JPEG/BMP file implementation: Y
-Script command to load a PNG/JPEG/BMP file: Y
-Load PNG/JPEG/BMP file from GUI: Y
-
-Save a PPM file implementation: Y
-Script command to save a PPM file: Y
-Save PPM file from GUI: Y
-
-Save a PNG/JPEG/BMP file implementation: Y
-Script command to save a PNG/JPEG/BMP file: Y
-Save PNG/JPEG/BMP file from GUI: Y
+File Format	Load (Script)	Load (GUI)	Save (Script)	Save (GUI)
+PPM	✔️	✔️	✔️	✔️
+PNG / JPEG / BMP	✔️	✔️	✔️	✔️
 
 
-Project Name: Graphical Image Manipulation And Editing
+
+⸻
+
+🚀 Project Highlights
+	•	Mosaicking Functionality:
+	•	Fully integrated image mosaicking feature.
+	•	Supports seed-based mosaic customization via GUI input dialog.
+	•	Available across all execution modes: GUI, CLI, and script.
+	•	Cross-Format Support:
+	•	Seamlessly load and save in .ppm, .png, .jpg, and .bmp formats.
+	•	Uniform interface across all modes of interaction.
+	•	Script and CLI Automation:
+	•	Efficient batch processing via custom scripts or CLI.
+	•	Ideal for repetitive or headless tasks.
+	•	Extensible Design:
+	•	Easily extendable to support new formats or features via MVC.
+	•	Clean separation of logic, control, and UI for future scalability.
+
+⸻
+
+🛠️ Design Decisions & Changes
+
+Mosaic Method Integration
+
+To integrate the mosaic(int numOfSeeds) functionality efficiently:
+	•	Model:
+	•	mosaic(int numOfSeeds) was directly added to the existing ImageInterface.
+	•	Implemented in ImageImpl, ensuring backward compatibility and minimal disruption.
+
+💡 Rationale:
+Adding a new interface (e.g., ImageInterfaceExtension) would have required modifications across 200+ classes, breaking the Open/Closed Principle and introducing potential regressions. Direct integration into the base interface was the most pragmatic and stable solution.
+
+⸻
+
+🧩 Mosaicking Implementation Details
+
+Model
+	•	ImageInterface updated with mosaic(int numOfSeeds)
+	•	ImageImpl class implements this method
+
+Controller
+	•	New MosaicCommand class created, implementing ImageCommandInterface
+	•	Registered MosaicCommand in AbstractController’s command map
+
+View
+	•	Added Mosaic to operationDrop (JComboBox) in GraphicalView
+	•	Implemented action listener via manageListeners() in GraphicalView
+	•	Added setup() support for mosaic command in view
+	•	Created a user prompt (JOptionPane.showInputDialog) for seed input
+
+⸻
+
+🖼️ Class Diagram
+
+📌 [Insert class diagram here]
+Create the class diagram using draw.io, Lucidchart, or PlantUML and add the exported image here:
+
+![Class Diagram](screenshots/class-diagram.png)
 
 
-Contents:
+⸻
 
-Introduction
-Design Changes If Any
-Mosaicking Implementation
-Citation
+📚 Citation
 
+If you use this tool or build upon it, please cite this project appropriately.
 
-Introduction:
-
-This project is a Java Swing-based GUI tool that provides a variety of image processing and editing functionalities via Graphical User Interface and also supports ways to run the application in Script mode or in an interactive text mode using the Jar File.
-This tool allows users to execute a range of operations that are specifically tailored to their unique image processing needs. 
-The operations can be conveniently performed via GUI or can be performed via the command line or alternatively uploaded through a script file. Currently, 
-the tool supports the processing of Conventional image files like (png, bmp, jpg) and ascii ppm image files. However, the project is designed with extensibility in mind, 
-with the capacity to support other image file types in the future by simply extending the existing MVC design.
-
-Design Changes If Any:
-
-We added mosaic(int numOfSeeds) method in the existing ImageInterface and added the mosaic(int numOfSeeds) method implimentation in the existing ImageImpl class which implements the ImageInterface.
-We had to make changes in the existing interface of ImageInterface because ImageInterface was tightly coupled with the rest of the design and any attempts in extending this existing ImageInterface with new ImageInterfaceExtention interface would have led to changes in approximately more than 200 exisitng implementation and test methods which would have vialoted the Open-Close principle and could have lead to some spill over effects in the existing implementation, so it was better to just add the new mosaic(int numOfSeeds) method in the existing ImageInterface only and provide its implementation in the exisitng ImageImpl class which implements the ImageInterface.
-
-This would reduce the number of changes required to support the image mosaicking method in the exisiting codebase.
-
-
-Mosaicking Implementation :
-
-Steps to implement Image Mosaicking:
-
-In Model Section :-
-
-1. Added the mosaic(int numOfSeeds) method in the existing ImageInterface;
-2. Added the mosaic(int numOfSeeds) method implimentation in the existing ImageImpl class which implements the ImageInterface.
-
-
-In Controller Section :-
-
-1. Added the mosaic command class which implements the existing ImageCommandInterface;
-2. Added the mosaic command class constructor in the AbstractController command map.
-
-In View Section :-
-
-1. Added the mosaic feature in the dropdown control of the existing JComboBox operationDrop of GraphicalView Class.
-2. Added the mosaic action listeners in the existing manageListeners method of GraphicalView Class.
-3. Added the mosaic command set in the existing setup(Set<String> commandSet) method of GraphicalView Class.
-4. Added showInputDialog() method in the GraphicalView Class to get the number of seeds to apply to the image for mosaicking from the user.
+⸻
