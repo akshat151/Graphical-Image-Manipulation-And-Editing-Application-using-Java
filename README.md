@@ -79,8 +79,6 @@ To implement the `mosaic(int numOfSeeds)` functionality:
 
 ## 📐 CLASS DIAGRAM
 
-📌 Add your class diagram below:
-
 ![Class Diagram](PDP_Image_Class_Diagram.png)
 
 
