@@ -1,4 +1,4 @@
-📸 Graphical Image Manipulation and Editing
+# 📸 Graphical Image Manipulation and Editing
 
 A powerful Java-based image editing application that supports a wide range of features for image manipulation through a Graphical User Interface (GUI), Command-Line Interface (CLI), and Script-based automation. Designed with extensibility in mind, the project follows a robust Model-View-Controller (MVC) architecture, making it adaptable for future enhancements.
 
