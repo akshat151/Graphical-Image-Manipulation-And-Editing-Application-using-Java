@@ -81,22 +81,8 @@ To implement the `mosaic(int numOfSeeds)` functionality:
 
 📌 Add your class diagram below:
 
-![Class Diagram](screenshots/class-diagram.png)
+![Class Diagram](PDP_Image_Class_Diagram.png)
 
----
-
-## 🖼️ SCREENSHOTS
-
-### GUI Main Window  
-![Main Window](screenshots/main-window.png)
-
-### Mosaic Feature in Action  
-![Mosaic Feature](screenshots/mosaic-preview.png)
-
-### Histogram Visualization  
-![Histogram](screenshots/histogram-visualization.png)
-
----
 
 ## 📚 CITATION
 
