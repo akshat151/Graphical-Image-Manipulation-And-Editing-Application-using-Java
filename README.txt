@@ -6,35 +6,35 @@ A powerful Java-based image editing application that supports a wide range of fe
 
 ✅ Feature Overview
 
-Feature	Command Line	Script	GUI
-Image Mosaicking	✔️	✔️	✔️
-Mosaic with Seed Input via GUI	✖️	✖️	✔️
-Histogram Visualization	✖️	✖️	✔️
+Feature	                    Command Line	     Script	        GUI
+Image Mosaicking	          ✅	               ✅	        ✅
+Mosaic with Seed Input via GUI	  ❌	               ❌               ✅
+Histogram Visualization	          ❌	               ❌               ✅
 
 📤 Import / Export Support
 
 File Format	Load (Script)	Load (GUI)	Save (Script)	Save (GUI)
-PPM	✔️	✔️	✔️	✔️
-PNG / JPEG / BMP	✔️	✔️	✔️	✔️
+PPM	            ✅	           ✅	            ✅	          ✅
+PNG / JPEG / BMP    ✅	           ✅	            ✅	          ✅
 
 
 
 ⸻
 
 🚀 Project Highlights
-	•	Mosaicking Functionality:
-	•	Fully integrated image mosaicking feature.
-	•	Supports seed-based mosaic customization via GUI input dialog.
-	•	Available across all execution modes: GUI, CLI, and script.
-	•	Cross-Format Support:
-	•	Seamlessly load and save in .ppm, .png, .jpg, and .bmp formats.
-	•	Uniform interface across all modes of interaction.
-	•	Script and CLI Automation:
-	•	Efficient batch processing via custom scripts or CLI.
-	•	Ideal for repetitive or headless tasks.
-	•	Extensible Design:
-	•	Easily extendable to support new formats or features via MVC.
-	•	Clean separation of logic, control, and UI for future scalability.
+	•	✅ Mosaicking Functionality:
+	•	Fully integrated image mosaicking feature
+	•	Supports seed-based mosaic customization via GUI input
+	•	Available across all execution modes: GUI, CLI, and script
+	•	✅ Cross-Format Support:
+	•	Seamless loading and saving of .ppm, .png, .jpg, and .bmp formats
+	•	Unified experience across all interaction modes
+	•	✅ Script & CLI Automation:
+	•	Efficient batch processing via scripts or command line
+	•	Perfect for repetitive or headless processing tasks
+	•	✅ Extensible Design:
+	•	Easily extendable to support additional image formats or features
+	•	Clean separation of logic and UI via MVC architecture
 
 ⸻
 
@@ -42,40 +42,40 @@ PNG / JPEG / BMP	✔️	✔️	✔️	✔️
 
 Mosaic Method Integration
 
-To integrate the mosaic(int numOfSeeds) functionality efficiently:
+To implement the mosaic(int numOfSeeds) functionality:
 	•	Model:
-	•	mosaic(int numOfSeeds) was directly added to the existing ImageInterface.
-	•	Implemented in ImageImpl, ensuring backward compatibility and minimal disruption.
+	•	Added mosaic(int numOfSeeds) to ImageInterface
+	•	Implemented in ImageImpl class
 
-💡 Rationale:
-Adding a new interface (e.g., ImageInterfaceExtension) would have required modifications across 200+ classes, breaking the Open/Closed Principle and introducing potential regressions. Direct integration into the base interface was the most pragmatic and stable solution.
+💡 Why not use an extension interface?
+Creating a new interface (e.g., ImageInterfaceExtension) would have affected 200+ files and violated the Open-Closed Principle. Direct integration minimized changes and risk.
 
 ⸻
 
 🧩 Mosaicking Implementation Details
 
 Model
-	•	ImageInterface updated with mosaic(int numOfSeeds)
-	•	ImageImpl class implements this method
+	•	✅ ImageInterface: added mosaic(int numOfSeeds)
+	•	✅ ImageImpl: implemented the method
 
 Controller
-	•	New MosaicCommand class created, implementing ImageCommandInterface
-	•	Registered MosaicCommand in AbstractController’s command map
+	•	✅ Created MosaicCommand class (ImageCommandInterface)
+	•	✅ Registered the new command in AbstractController
 
 View
-	•	Added Mosaic to operationDrop (JComboBox) in GraphicalView
-	•	Implemented action listener via manageListeners() in GraphicalView
-	•	Added setup() support for mosaic command in view
-	•	Created a user prompt (JOptionPane.showInputDialog) for seed input
+	•	✅ Added Mosaic to the dropdown (operationDrop) in GraphicalView
+	•	✅ Implemented listeners in manageListeners()
+	•	✅ Updated setup(Set<String>) to recognize the new command
+	•	✅ Prompted user for seeds using JOptionPane.showInputDialog
 
 ⸻
 
-🖼️ Class Diagram
+📐 Class Diagram
 
-📌 [Insert class diagram here]
-Create the class diagram using draw.io, Lucidchart, or PlantUML and add the exported image here:
+📌 Add your class diagram below:
 
 ![Class Diagram](screenshots/class-diagram.png)
+
 
 
 ⸻
@@ -83,5 +83,3 @@ Create the class diagram using draw.io, Lucidchart, or PlantUML and add the expo
 📚 Citation
 
 If you use this tool or build upon it, please cite this project appropriately.
-
-⸻
